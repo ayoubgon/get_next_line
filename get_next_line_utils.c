@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 14:06:01 by adehbi            #+#    #+#             */
+/*   Updated: 2024/12/14 14:11:06 by adehbi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char	*next_line_lift(char *re_str)
+char	*next_str_lift(char *re_str)
 {
 	char	*new_str;
 	int		i;
@@ -8,21 +20,21 @@ char	*next_line_lift(char *re_str)
 
 	i = 0;
 	j = 0;
+	if (!re_str)
+		return (NULL);
 	while (re_str[i] && re_str[i] != '\n')
 		i++;
 	if (!re_str[i])
-		{
-			free(re_str);
-			return (NULL);
-		}
+		return (NULL);
 	new_str = malloc((ft_strlen(re_str) - i) + 1);
 	if (!new_str)
 		return (NULL);
-		i++;
+	i++;
 	while (re_str[i])
 		new_str[j++] = re_str[i++];
 	new_str[j] = 0;
-	return(new_str);
+	free(re_str);
+	return (new_str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -52,6 +64,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (str);
 }
+
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
@@ -65,6 +78,7 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
+
 size_t	ft_strlen(char *str)
 {
 	size_t	i;
@@ -74,11 +88,14 @@ size_t	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	int		i;
 	char	*string;
 
+	if (!s1)
+		return (NULL);
 	i = ft_strlen((char *)s1);
 	string = malloc(i + 1);
 	if (string == NULL)
