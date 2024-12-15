@@ -6,7 +6,7 @@
 /*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 14:04:49 by adehbi            #+#    #+#             */
-/*   Updated: 2024/12/14 14:18:32 by adehbi           ###   ########.fr       */
+/*   Updated: 2024/12/15 15:00:36 by adehbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*read_from_fd(int fd, char *re_str)
 {
 	char	*buff;
 	int		n_byte;
+	char	*tmp;
 
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
@@ -25,9 +26,11 @@ char	*read_from_fd(int fd, char *re_str)
 	{
 		n_byte = read (fd, buff, BUFFER_SIZE);
 		if (n_byte < 0)
-			return (free (buff), NULL);
+			return (free (buff),free (re_str), NULL);
 		buff[n_byte] = '\0';
+		tmp = re_str;
 		re_str = ft_strjoin(re_str, buff);
+		free (tmp);
 		if (!re_str)
 			return (free (buff), NULL);
 		if (ft_strchr(re_str, '\n'))
@@ -54,10 +57,10 @@ char	*extract_line(char *re_str)
 	{
 		line[i] = '\n';
 		line[i + 1] = '\0';
-		i--;
 	}
 	else
 		line[i] = '\0';
+	i--;
 	while (i >= 0)
 	{
 		line[i] = re_str[i];

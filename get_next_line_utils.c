@@ -6,7 +6,7 @@
 /*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 14:06:01 by adehbi            #+#    #+#             */
-/*   Updated: 2024/12/14 14:11:06 by adehbi           ###   ########.fr       */
+/*   Updated: 2024/12/15 14:50:05 by adehbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*next_str_lift(char *re_str)
 	while (re_str[i] && re_str[i] != '\n')
 		i++;
 	if (!re_str[i])
-		return (NULL);
+		return (free (re_str), NULL);
 	new_str = malloc((ft_strlen(re_str) - i) + 1);
 	if (!new_str)
 		return (NULL);
@@ -33,7 +33,7 @@ char	*next_str_lift(char *re_str)
 	while (re_str[i])
 		new_str[j++] = re_str[i++];
 	new_str[j] = 0;
-	free(re_str);
+	free (re_str);
 	return (new_str);
 }
 
