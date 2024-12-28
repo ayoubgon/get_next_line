@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adehbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/14 14:04:49 by adehbi            #+#    #+#             */
-/*   Updated: 2024/12/28 17:26:38 by adehbi           ###   ########.fr       */
+/*   Created: 2024/12/28 17:29:36 by adehbi            #+#    #+#             */
+/*   Updated: 2024/12/28 17:30:26 by adehbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_from_fd(int fd, char *re_str)
 {
@@ -71,15 +71,15 @@ char	*extract_line(char *re_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*re_str;
+	static char	*re_str[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	re_str = read_from_fd(fd, re_str);
-	if (!re_str)
+	re_str[fd] = read_from_fd(fd, re_str[fd]);
+	if (!re_str[fd])
 		return (NULL);
-	line = extract_line(re_str);
-	re_str = next_str_lift(re_str);
+	line = extract_line(re_str[fd]);
+	re_str[fd] = next_str_lift(re_str[fd]);
 	return (line);
 }
