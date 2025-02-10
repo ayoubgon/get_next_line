@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adehbi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:29:36 by adehbi            #+#    #+#             */
 /*   Updated: 2024/12/28 17:30:26 by adehbi           ###   ########.fr       */
@@ -28,9 +28,7 @@ char	*read_from_fd(int fd, char *re_str)
 		if (n_byte < 0)
 			return (free (buff), free (re_str), NULL);
 		buff[n_byte] = '\0';
-		tmp = re_str;
 		re_str = ft_strjoin(re_str, buff);
-		free (tmp);
 		if (!re_str)
 			return (free (buff), NULL);
 		if (ft_strchr(re_str, '\n'))
@@ -74,7 +72,7 @@ char	*get_next_line(int fd)
 	static char	*re_str[1024];
 	char		*line;
 
-	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (NULL);
 	re_str[fd] = read_from_fd(fd, re_str[fd]);
 	if (!re_str[fd])

@@ -28,9 +28,7 @@ char	*read_from_fd(int fd, char *re_str)
 		if (n_byte < 0)
 			return (free (buff), free (re_str), NULL);
 		buff[n_byte] = '\0';
-		tmp = re_str;
 		re_str = ft_strjoin(re_str, buff);
-		free (tmp);
 		if (!re_str)
 			return (free (buff), NULL);
 		if (ft_strchr(re_str, '\n'))
@@ -74,7 +72,7 @@ char	*get_next_line(int fd)
 	static char	*re_str;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (NULL);
 	re_str = read_from_fd(fd, re_str);
 	if (!re_str)

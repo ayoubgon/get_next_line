@@ -25,8 +25,8 @@ char	*read_from_fd(int fd, char *re_str);
 char	*extract_line(char *re_str);
 char	*next_str_lift(char *re_str);
 size_t	ft_strlen(char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(char *s, int c);
+char	*ft_strdup(char *s1);
 
 #endif 

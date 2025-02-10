@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adehbi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:27:34 by adehbi            #+#    #+#             */
 /*   Updated: 2024/12/28 17:27:39 by adehbi           ###   ########.fr       */
@@ -37,7 +37,7 @@ char	*next_str_lift(char *re_str)
 	return (new_str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		l;
@@ -51,7 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s1));
 	if (!s1 && !s2)
 		return (NULL);
-	str = malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i])
@@ -62,10 +62,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[l])
 		str[i++] = s2[l++];
 	str[i] = '\0';
+	free (s1);
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int		i;
 	char	ch;
@@ -75,7 +76,7 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i] && s[i] != ch)
 		i++;
 	if (s[i] == ch)
-		return ((char *)&s[i]);
+		return (&s[i]);
 	return (NULL);
 }
 
@@ -89,14 +90,14 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	int		i;
 	char	*string;
 
 	if (!s1)
 		return (NULL);
-	i = ft_strlen((char *)s1);
+	i = ft_strlen(s1);
 	string = malloc(i + 1);
 	if (string == NULL)
 		return (NULL);
