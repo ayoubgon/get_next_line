@@ -6,7 +6,7 @@
 /*   By: adehbi <adehbi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:27:34 by adehbi            #+#    #+#             */
-/*   Updated: 2024/12/28 17:27:39 by adehbi           ###   ########.fr       */
+/*   Updated: 2025/02/12 15:53:51 by adehbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
-		return (NULL);
+		return (free (s1), NULL);
 	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
+		str[i] = s1[i++];
 	while (s2[l])
 		str[i++] = s2[l++];
 	str[i] = '\0';
